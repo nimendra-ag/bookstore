@@ -2,7 +2,9 @@
 
 import 'package:bookstore/services/alert_service.dart';
 import 'package:bookstore/services/auth_service.dart';
+import 'package:bookstore/services/media_service.dart';
 import 'package:bookstore/services/navigation_service.dart';
+import 'package:bookstore/services/storage_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:bookstore/firebase_options.dart';
@@ -22,8 +24,8 @@ Future<void> registerServices() async {
 
   getIt.registerSingleton<NavigationService>(NavigationService());
   getIt.registerSingleton<AlertService>(AlertService());
-//   getIt.registerSingleton<MediaService>(MediaService());
-//   getIt.registerSingleton<StorageService>(StorageService());
+  getIt.registerSingleton<MediaService>(MediaService());
+  getIt.registerSingleton<StorageService>(StorageService());
 //   getIt.registerSingleton<DatabaseService>(DatabaseService());
 }
 

@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               _loginButton(),
-              // _createAnAccountLink(),
+              _createAnAccountLink(),
             ],
           )),
     );
@@ -154,26 +154,26 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Widget _createAnAccountLink() {
-  //   return Expanded(
-  //     child: Row(
-  //     mainAxisSize: MainAxisSize.max,
-  //     mainAxisAlignment: MainAxisAlignment.center,
-  //     crossAxisAlignment: CrossAxisAlignment.end,
-  //     children: [
-  //       const Text("Don't have an account? "),
-  //       GestureDetector(
-  //         onTap: () {
-  //           _navigationService.pushNamed("/register");
-  //         },
-  //         child: const Text(
-  //           "Sign Up",
-  //           style: TextStyle(
-  //             fontWeight: FontWeight.w800,
-  //           ),
-  //         ),
-  //       )
-  //     ],
-  //   ));
-  // }
+  Widget _createAnAccountLink() {
+    return Expanded(
+      child: Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const Text("Don't have an account? "),
+        GestureDetector(
+          onTap: () {
+            _navigationService.pushNamed("/register");
+          },
+          child: const Text(
+            "Sign Up",
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        )
+      ],
+    ));
+  }
 }
