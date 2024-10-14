@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey();
   late AuthService _authService;
   late NavigationService _navigationService;
-  // late AlertService _alertService;
+  late AlertService _alertService;
 
   String? email, password;
 
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _authService = _getIt.get<AuthService>();
     _navigationService = _getIt.get<NavigationService>();
-    // _alertService = _getIt.get<AlertService>();
+    _alertService = _getIt.get<AlertService>();
   }
 
   @override
@@ -135,12 +135,12 @@ class _LoginPageState extends State<LoginPage> {
             if (result) {
               _navigationService.pushReplacementNamed('/home');
              } 
-            //else {
-            //   _alertService.showToast(
-            //     text: "Failed to login, Please try again!",
-            //     icon: Icons.error,
-            //   );
-            // }
+            else {
+              _alertService.showToast(
+                text: "Failed to login, Please try again!",
+                icon: Icons.error,
+              );
+            }
           }
         },
         color: Theme.of(context).colorScheme.primary,

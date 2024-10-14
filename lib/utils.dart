@@ -1,4 +1,6 @@
 // import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
+
+import 'package:bookstore/services/alert_service.dart';
 import 'package:bookstore/services/auth_service.dart';
 import 'package:bookstore/services/navigation_service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,7 +21,7 @@ Future<void> registerServices() async {
   }
 
   getIt.registerSingleton<NavigationService>(NavigationService());
-//   getIt.registerSingleton<AlertService>(AlertService());
+  getIt.registerSingleton<AlertService>(AlertService());
 //   getIt.registerSingleton<MediaService>(MediaService());
 //   getIt.registerSingleton<StorageService>(StorageService());
 //   getIt.registerSingleton<DatabaseService>(DatabaseService());
