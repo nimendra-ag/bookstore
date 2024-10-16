@@ -2,6 +2,7 @@
 
 import 'package:bookstore/services/alert_service.dart';
 import 'package:bookstore/services/auth_service.dart';
+import 'package:bookstore/services/database_service.dart';
 import 'package:bookstore/services/media_service.dart';
 import 'package:bookstore/services/navigation_service.dart';
 import 'package:bookstore/services/storage_service.dart';
@@ -26,7 +27,7 @@ Future<void> registerServices() async {
   getIt.registerSingleton<AlertService>(AlertService());
   getIt.registerSingleton<MediaService>(MediaService());
   getIt.registerSingleton<StorageService>(StorageService());
-//   getIt.registerSingleton<DatabaseService>(DatabaseService());
+  getIt.registerSingleton<DatabaseService>(DatabaseService());
 }
 
 

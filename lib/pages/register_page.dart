@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:bookstore/consts.dart';
-// import 'package:bookstore/models/user_profile.dart';
+import 'package:bookstore/models/user_profile.dart';
 import 'package:bookstore/services/alert_service.dart';
 import 'package:bookstore/services/auth_service.dart';
 import 'package:bookstore/services/database_service.dart';
@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   late MediaService _mediaService;
   late NavigationService _navigationService;
   late StorageService _storageService;
-  // late DatabaseService _databaseService;
+  late DatabaseService _databaseService;
   late AlertService _alertService;
 
   String? email, password, name;
@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _navigationService = _getIt.get<NavigationService>();
     _authService = _getIt.get<AuthService>();
     _storageService = _getIt.get<StorageService>();
-    // _databaseService = _getIt.get<DatabaseService>();
+    _databaseService = _getIt.get<DatabaseService>();
   }
 
   @override
@@ -141,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     password = value;
                   });
                 }),
-            // _registerButton()
+            _registerButton()
           ],
         ),
       ),
@@ -167,60 +167,60 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // Widget _registerButton() {
-  //   return SizedBox(
-  //     width: MediaQuery.sizeOf(context).width,
-  //     child: MaterialButton(
-  //       color: Theme.of(context).colorScheme.primary,
-  //       onPressed: () async {
-  //         setState(() {
-  //           isLoading = true;
-  //         });
-  //         try {
-  //           if ((_registerFormKey.currentState?.validate() ?? false) &&
-  //               selectedImage != null) {
-  //             _registerFormKey.currentState?.save();
-  //             bool result = await _authService.signup(email!, password!);
-  //             if (result) {
-  //               String? pfpURL = await _storageService.uploadUserPfp(
-  //                   file: selectedImage!, uid: _authService.user!.uid);
-  //               if (pfpURL != null) {
-  //                 await _databaseService.createUserProfile(
-  //                     userProfile: UserProfile(
-  //                         uid: _authService.user!.uid,
-  //                         name: name,
-  //                         pfpURL: pfpURL));
-  //                 _alertService.showToast(
-  //                   text: "User registered successfully!",
-  //                   icon: Icons.check,
-  //                 );
-  //                 _navigationService.goBack();
-  //                 _navigationService.pushReplacementNamed("/home");
-  //               } else {
-  //                 throw Exception("Unable to upload user profile picture.");
-  //               }
-  //             } else {
-  //               throw Exception("Unable to register user!");
-  //             }
-  //           }
-  //         } catch (e) {
-  //           print(e);
-  //           _alertService.showToast(
-  //             text: "Failed to register, Please try again!",
-  //             icon: Icons.error,
-  //           );
-  //         }
-  //         setState(() {
-  //           isLoading = false;
-  //         });
-  //       },
-  //       child: const Text(
-  //         "Register",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget _registerButton() {
+    return SizedBox(
+      width: MediaQuery.sizeOf(context).width,
+      child: MaterialButton(
+        color: Theme.of(context).colorScheme.primary,
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+          try {
+            if ((_registerFormKey.currentState?.validate() ?? false) &&
+                selectedImage != null) {
+              _registerFormKey.currentState?.save();
+              bool result = await _authService.signup(email!, password!);
+              if (result) {
+                String? pfpURL = await _storageService.uploadUserPfp(
+                    file: selectedImage!, uid: _authService.user!.uid);
+                if (pfpURL != null) {
+                  await _databaseService.createUserProfile(
+                      userProfile: UserProfile(
+                          uid: _authService.user!.uid,
+                          name: name,
+                          pfpURL: pfpURL));
+                  _alertService.showToast(
+                    text: "User registered successfully!",
+                    icon: Icons.check,
+                  );
+                  _navigationService.goBack();
+                  _navigationService.pushReplacementNamed("/home");
+                } else {
+                  throw Exception("Unable to upload user profile picture.");
+                }
+              } else {
+                throw Exception("Unable to register user!");
+              }
+            }
+          } catch (e) {
+            print(e);
+            _alertService.showToast(
+              text: "Failed to register, Please try again!",
+              icon: Icons.error,
+            );
+          }
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: const Text(
+          "Register",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
 
   Widget _loginAccountLink() {
     return Expanded(
